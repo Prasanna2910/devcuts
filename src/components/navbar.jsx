@@ -1,30 +1,52 @@
 import React from "react";
+import devcutz from "../assets/devcutz.png";
 
 const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 w-full bg-[#FFFFFF] shadow-sm z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        
         {/* Logo */}
-        <div className="text-2xl font-semibold text-[#1C1C1C] tracking-wide">
-          Devcutz
+        <div className="flex items-center gap-3">
+          <img
+            src={devcutz}
+            alt="Devcutz Logo"
+            className="h-12 w-auto object-contain"
+          />
+          <span className="text-2xl font-semibold text-[#1C1C1C] tracking-wide">
+            Devcutz
+          </span>
         </div>
 
         {/* Nav Links */}
         <div className="hidden md:flex space-x-8">
-          <a href="#home" className="text-[#1C1C1C] hover:text-[#C08457] transition duration-300">
+          <a
+            href="#home"
+            className="text-[#1C1C1C] hover:text-[#C08457] transition duration-300"
+          >
             Home
           </a>
-          <a href="#portfolio" className="text-[#1C1C11C] hover:text-[#C08457] transition duration-300">
+          <a
+            href="#portfolio"
+            className="text-[#1C1C11C] hover:text-[#C08457] transition duration-300"
+          >
             Portfolio
           </a>
-          <a href="#services" className="text-[#1C1C1C] hover:text-[#C08457] transition duration-300">
+          <a
+            href="#services"
+            className="text-[#1C1C1C] hover:text-[#C08457] transition duration-300"
+          >
             Services
           </a>
-          <a href="#about" className="text-[#1C1C1C] hover:text-[#C08457] transition duration-300">
+          <a
+            href="#about"
+            className="text-[#1C1C1C] hover:text-[#C08457] transition duration-300"
+          >
             About
           </a>
-          <a href="#contact" className="text-[#1C1C1C] hover:text-[#C08457] transition duration-300">
+          <a
+            href="#contact"
+            className="text-[#1C1C1C] hover:text-[#C08457] transition duration-300"
+          >
             Contact
           </a>
         </div>
@@ -41,11 +63,8 @@ const Navbar = () => {
 
         {/* Mobile Menu Icon */}
         <div className="md:hidden">
-          <button className="text-[#1C1C1C] text-2xl">
-            ☰
-          </button>
+          <button className="text-[#1C1C1C] text-2xl">☰</button>
         </div>
-
       </div>
     </nav>
   );
