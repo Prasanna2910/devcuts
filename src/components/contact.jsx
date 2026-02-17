@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const [activeForm, setActiveForm] = useState("email");
+  const emailFormRef = useRef();
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const messageTimeoutRef = useRef(null);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -9,6 +14,28 @@ const Contact = () => {
     eventType: "Wedding",
     message: "",
   });
+
+  // Initialize EmailJS
+  useEffect(() => {
+    const publicKey = import.meta.env.VITE_PUBLIC_KEY;
+    if (publicKey) {
+      emailjs.init(publicKey);
+    }
+  }, []);
+
+  // Clear message after 4 seconds
+  useEffect(() => {
+    if (message) {
+      messageTimeoutRef.current = setTimeout(() => {
+        setMessage("");
+      }, 4000);
+    }
+    return () => {
+      if (messageTimeoutRef.current) {
+        clearTimeout(messageTimeoutRef.current);
+      }
+    };
+  }, [message]);
 
   const handleChange = (e) => {
     setFormData({
@@ -35,7 +62,47 @@ ${formData.message}`;
 
   const handleEmailSubmit = (e) => {
     e.preventDefault();
-    alert("Email functionality can be connected using EmailJS or backend.");
+    setLoading(true);
+    setMessage("");
+
+    // Format email in proper structure
+    const formattedMessage = `Name: ${formData.name}
+Email: ${formData.email}
+Event Type: ${formData.eventType}
+
+---
+
+${formData.message}`;
+
+    const templateParams = {
+      from_name: formData.name,
+      reply_to: formData.email,
+      message: formattedMessage,
+    };
+
+    emailjs
+      .send(
+        import.meta.env.VITE_SERVICE_ID,
+        import.meta.env.VITE_TEMPLATE_ID,
+        templateParams
+      )
+      .then(
+        () => {
+          setMessage("✅ Message sent successfully!");
+          setLoading(false);
+          setFormData({
+            name: "",
+            email: "",
+            eventType: "Wedding",
+            message: "",
+          });
+        },
+        (error) => {
+          console.error("EmailJS error:", error);
+          setMessage("❌ Failed to send message. Please try again.");
+          setLoading(false);
+        }
+      );
   };
 
   return (
@@ -80,11 +147,12 @@ ${formData.message}`;
         <div className="bg-white p-8 rounded-2xl shadow-md">
           {/* EMAIL FORM */}
           {activeForm === "email" && (
-            <form onSubmit={handleEmailSubmit} className="space-y-6">
+            <form ref={emailFormRef} onSubmit={handleEmailSubmit} className="space-y-6">
               <input
                 type="text"
                 name="name"
                 placeholder="Full Name"
+                value={formData.name}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#C08457] focus:outline-none"
                 required
@@ -94,6 +162,7 @@ ${formData.message}`;
                 type="email"
                 name="email"
                 placeholder="Email Address"
+                value={formData.email}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#C08457] focus:outline-none"
                 required
@@ -101,6 +170,7 @@ ${formData.message}`;
 
               <select
                 name="eventType"
+                value={formData.eventType}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#C08457] focus:outline-none"
               >
@@ -113,16 +183,31 @@ ${formData.message}`;
                 name="message"
                 rows="4"
                 placeholder="Tell me about your event..."
+                value={formData.message}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#C08457] focus:outline-none"
+                required
               />
 
               <button
                 type="submit"
-                className="w-full bg-[#C08457] text-white py-3 rounded-full hover:opacity-90 transition"
+                disabled={loading}
+                className="w-full bg-[#C08457] text-white py-3 rounded-full hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Email
+                {loading ? "Sending..." : "Send Email"}
               </button>
+
+              {message && (
+                <div
+                  className={`p-3 rounded-lg text-center font-medium ${
+                    message.includes("✅")
+                      ? "bg-green-100 text-green-800"
+                      : "bg-red-100 text-red-800"
+                  }`}
+                >
+                  {message}
+                </div>
+              )}
             </form>
           )}
 

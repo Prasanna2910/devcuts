@@ -1,4 +1,3 @@
-import react from 'react' 
 import Navbar from './components/navbar'
 import Home from './components/home'
 import Portfolio from './components/portfolio'
