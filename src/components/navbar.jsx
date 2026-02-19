@@ -1,5 +1,4 @@
 import React from "react";
-import devcutz from "../assets/devcutz.png";
 
 const Navbar = () => {
   return (
@@ -7,11 +6,6 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center gap-3">
-          <img
-            src={devcutz}
-            alt="Devcutz Logo"
-            className="h-12 w-auto object-contain"
-          />
           <span className="text-2xl font-semibold text-[#1C1C1C] tracking-wide">
             Devcutz
           </span>

@@ -1,4 +1,6 @@
 import React from "react";
+import logo from "../assets/devlogo.png"; // adjust if filename differs
+import backgroundImage from "../assets/background.jpg";
 
 const Home = () => {
   return (
@@ -6,31 +8,30 @@ const Home = () => {
       id="home"
       className="relative h-screen w-full flex items-center justify-center"
     >
-      {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage:
-            "url('https://images.pexels.com/photos/12200847/pexels-photo-12200847.jpeg')",
+          backgroundImage: `url(${backgroundImage})`,
         }}
       ></div>
 
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/50"></div>
+      {/* Elegant Dark Overlay */}
+      <div className="absolute inset-0 bg-black/60"></div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-3xl">
-        <h1 className="text-4xl md:text-6xl font-semibold text-white leading-tight">
-          Capturing Sacred Moments
-          <span className="block text-[#C08457] mt-2">
-            Of Your Wedding Story
-          </span>
-        </h1>
+      <div className="relative z-10 text-center px-6 flex flex-col items-center">
+        {/* Logo */}
+        <img
+          src={logo}
+          alt="Devcutz Logo"
+          className="h-52 md:h-72 w-auto object-contain mb-1"
+        />
 
-        <p className="mt-6 text-lg md:text-xl text-gray-200">
-          North Indian Weddings • Cultural Rituals • Timeless Emotions
+        <p className="font-lovelo text-lg md:text-2xl text-white tracking-[0.25em] uppercase font-bold">
+          Making memories with moments
         </p>
 
+        {/* Buttons */}
         <div className="mt-8 flex justify-center gap-4">
           <a
             href="#portfolio"

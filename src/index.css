@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+/* Lovelo Font */
+@font-face {
+  font-family: 'Lovelo';
+  src: url('./assets/fonts/Lovelo-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+.font-lovelo {
+  font-family: 'Lovelo', sans-serif;
+}
