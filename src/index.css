@@ -1,15 +1,219 @@
 @import "tailwindcss";
 
+/* ===================================== */
+/* Global Settings */
+/* ===================================== */
+
+/* Smooth scrolling for full-page sections */
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* ===================================== */
 /* Lovelo Font */
+/* ===================================== */
+
 @font-face {
   font-family: 'Lovelo';
-  src: url('./assets/fonts/Lovelo-Black.otf') format('opentype');
+  src: url('./assets/fonts/Lovelo_Black.otf') format('opentype');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 
-
 .font-lovelo {
   font-family: 'Lovelo', sans-serif;
+}
+
+
+/* ===================================== */
+/* Existing Animations (UNCHANGED) */
+/* ===================================== */
+
+/* Smooth fade up (slow version) */
+@keyframes fadeUpSlow {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeUpSlow {
+  animation: fadeUpSlow 2s ease-out forwards;
+}
+
+
+/* Background slow zoom */
+@keyframes bgZoom {
+  from {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.animate-bgZoom {
+  animation: bgZoom 6s ease-out forwards;
+}
+
+
+/* ===================================== */
+/* Premium Cinematic Animations */
+/* (Home – Luxury Feel) */
+/* ===================================== */
+
+/* Logo Reveal – rise + subtle scale */
+@keyframes logoReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-logoReveal {
+  animation: logoReveal 1.8s ease-out forwards;
+}
+
+
+/* Text Luxury Reveal – wide → tight spacing */
+@keyframes textRevealLuxury {
+  0% {
+    opacity: 0;
+    letter-spacing: 0.6em;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    letter-spacing: 0.25em;
+    transform: translateY(0);
+  }
+}
+
+.animate-textLuxury {
+  animation: textRevealLuxury 2s ease-out forwards;
+}
+
+
+/* Buttons Soft Entry */
+@keyframes fadeUpSoft {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeUpSoft {
+  animation: fadeUpSoft 1.4s ease-out forwards;
+}
+
+
+/* ===================================== */
+/* Section Entry Animation (Optional) */
+/* ===================================== */
+
+@keyframes sectionFade {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-sectionFade {
+  animation: sectionFade 1s ease-out forwards;
+}
+
+
+/* ===================================== */
+/* Premium Hover Effects */
+/* ===================================== */
+
+/* Subtle hover lift for cards/buttons */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+
+/* ===================================== */
+/* Continuous Scroll Reveal Animation */
+/* (Works while scrolling up & down) */
+/* ===================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(100px) scale(0.98);
+  transition: opacity 1s ease, transform 1s ease;
+  will-change: opacity, transform;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+
+/* ===================================== */
+/* Optional: Smooth Image Rendering */
+/* (Helps photography sites look sharper) */
+/* ===================================== */
+
+img {
+  image-rendering: auto;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+
+/* ===================================== */
+/* Optional: Better Button Interaction */
+/* ===================================== */
+
+button {
+  transition: all 0.3s ease;
+}
+
+
+now give me the entire index.css code after adding the below
+
+/* ===================================== */
+/* Ultra Smooth Premium Scroll Reveal */
+/* ===================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(120px) scale(0.97);
+  filter: blur(6px);
+  transition:
+    opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform, filter;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
 }

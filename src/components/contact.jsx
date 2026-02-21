@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
-import { FaWhatsapp, FaInstagram, FaGoogle } from "react-icons/fa";
+import { FaWhatsapp, FaInstagram, FaEnvelope } from "react-icons/fa";
 
 const Contact = () => {
   const [loading, setLoading] = useState(false);
@@ -12,6 +12,7 @@ const Contact = () => {
     message: "",
   });
 
+  // Initialize EmailJS
   useEffect(() => {
     const publicKey = import.meta.env.VITE_PUBLIC_KEY;
     if (publicKey) {
@@ -47,11 +48,12 @@ const Contact = () => {
         setStatusMessage("✅ Query sent successfully!");
         setLoading(false);
 
+        // Open Gmail compose as well
         const subject = encodeURIComponent(
           `New Query from ${formData.name}`
         );
         const body = encodeURIComponent(
-          `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+          `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
         );
 
         window.open(
@@ -67,34 +69,38 @@ const Contact = () => {
       });
   };
 
+  // Contact details
   const whatsappNumber = "916379131320";
   const instagramLink = "https://www.instagram.com/_devcutz_";
   const emailAddress = "devcutz.query@gmail.com";
 
-  // Reusable animated button
-  const AnimatedButton = ({ href, children, colorClasses }) => (
+  // Floating Social Button Component (with brand icon colors)
+  const SocialButton = ({ link, bgColor, borderColor, Icon, iconColor }) => (
     <a
-      href={href}
+      href={link}
       target="_blank"
       rel="noopener noreferrer"
-      className={`relative group cursor-pointer text-white overflow-hidden h-16 w-full rounded-md flex justify-center items-center font-semibold ${colorClasses}`}
+      className="social-button"
     >
-      {/* Animated circles */}
-      <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-0 w-40 h-40 rounded-full group-hover:scale-150 group-hover:opacity-40 duration-500 bg-black/20"></div>
-      <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-0 w-32 h-32 rounded-full group-hover:scale-150 group-hover:opacity-40 duration-500 bg-black/20"></div>
-      <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-0 w-24 h-24 rounded-full group-hover:scale-150 group-hover:opacity-40 duration-500 bg-black/20"></div>
-      <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-0 w-14 h-14 rounded-full group-hover:scale-150 group-hover:opacity-40 duration-500 bg-black/20"></div>
+      <div className="relative w-14 h-14 rounded-full group cursor-pointer">
+        {/* Floating background */}
+        <div
+          className={`absolute top-0 left-0 w-full h-full rounded-full ${bgColor} duration-300 group-hover:-top-6 group-hover:shadow-2xl`}
+        ></div>
 
-      <div className="z-10 flex items-center gap-3 text-lg">
-        {children}
+        {/* Icon container */}
+        <div
+          className={`relative z-10 w-full h-full flex items-center justify-center border-2 ${borderColor} rounded-full bg-white`}
+        >
+          <Icon size={22} className={`${iconColor}`} />
+        </div>
       </div>
     </a>
   );
 
   return (
-    <section id="contact" className="bg-[#F8F5F2] py-20 px-6">
+    <section id="contact" className="reveal bg-[#F8F5F2] py-20 px-6">
       <div className="max-w-6xl mx-auto">
-
         {/* Heading */}
         <div className="text-center mb-14">
           <h2 className="text-4xl font-semibold text-[#1C1C1C]">
@@ -105,40 +111,45 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10">
-
-          {/* LEFT SIDE */}
-          <div className="bg-white p-8 rounded-2xl shadow-md flex flex-col justify-center space-y-6">
-            <h3 className="text-2xl font-semibold text-[#1C1C1C] mb-7">
+        {/* Layout */}
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          {/* LEFT – Social Buttons */}
+          <div className="bg-white p-10 rounded-2xl shadow-md flex flex-col items-center">
+            <h3 className="text-2xl font-semibold text-[#1C1C1C] mb-8">
               Connect with Us
             </h3>
 
-            <AnimatedButton
-              href={`https://wa.me/${whatsappNumber}`}
-              colorClasses="bg-green-500"
-            >
-              <FaWhatsapp size={22} />
-              WhatsApp
-            </AnimatedButton>
+            <div className="flex gap-8">
+              {/* WhatsApp */}
+              <SocialButton
+                link={`https://wa.me/${whatsappNumber}`}
+                bgColor="bg-green-500"
+                borderColor="border-green-500"
+                Icon={FaWhatsapp}
+                iconColor="text-green-600"
+              />
 
-            <AnimatedButton
-              href={instagramLink}
-              colorClasses="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500"
-            >
-              <FaInstagram size={22} />
-              Instagram
-            </AnimatedButton>
+              {/* Instagram */}
+              <SocialButton
+                link={instagramLink}
+                bgColor="bg-gradient-to-br from-pink-500 via-purple-500 to-yellow-500"
+                borderColor="border-pink-500"
+                Icon={FaInstagram}
+                iconColor="text-purple-600"
+              />
 
-            <AnimatedButton
-              href={`mailto:${emailAddress}`}
-              colorClasses="bg-red-500"
-            >
-              <FaGoogle size={22} />
-              Gmail
-            </AnimatedButton>
+              {/* Gmail */}
+              <SocialButton
+                link={`mailto:${emailAddress}`}
+                bgColor="bg-red-500"
+                borderColor="border-red-500"
+                Icon={FaEnvelope}
+                iconColor="text-red-600"
+              />
+            </div>
           </div>
 
-          {/* RIGHT SIDE */}
+          {/* RIGHT – Query Form */}
           <div className="bg-white p-8 rounded-2xl shadow-md">
             <h3 className="text-2xl font-semibold text-[#1C1C1C] mb-6">
               Send a Query

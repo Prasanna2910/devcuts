@@ -9,12 +9,12 @@ const Portfolio = () => {
   const categories = Object.keys(portfolioData);
 
   return (
-    <section id="portfolio" className="bg-[#F8F5F2] py-20 px-6">
+    <section id="portfolio" className="reveal bg-[#F8F5F2] py-20 px-6">
       <div className="max-w-7xl mx-auto">
         
         {/* Heading */}
         <h2 className="text-4xl font-semibold text-center text-[#1C1C1C]">
-          Portfolio
+          Our Portfolio
         </h2>
         <p className="text-center text-[#6B6B6B] mt-3">
           Explore our work across different moments

@@ -19,20 +19,40 @@ const services = [
     description:
       "Natural, unposed, and real moments that truly reflect emotions and authentic expressions.",
   },
+  {
+    id: 4,
+    title: "Drone Photography",
+    description:
+      "Stunning aerial shots and cinematic perspectives that add a breathtaking view to weddings, events, and special occasions.",
+  },
+  {
+    id: 5,
+    title: "Photo Frames",
+    description:
+      "Premium custom photo framing for your cherished memories, including frames for your existing artwork and photographs captured by us.",
+  },
+  {
+    id: 6,
+    title: "Printables",
+    description:
+      "High-quality customized prints including T-shirts, ID cards, banners, flex, and other personalized branding and event materials.",
+  },
 ];
 
 const Services = () => {
-  return (
-    <section id="services" className="bg-[#F8F5F2] py-20 px-6">
-      <div className="max-w-6xl mx-auto">
+  const phoneNumber = "916379131320";
 
+  return (
+    <section id="services" className="reveal bg-[#F8F5F2] py-20 px-6">
+      <div className="max-w-6xl mx-auto">
         {/* Section Heading */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-semibold text-[#1C1C1C]">
-            My Services
+            Our Services
           </h2>
           <p className="text-[#6B6B6B] mt-4">
-            Professional photography tailored to capture your most meaningful moments.
+            Professional photography tailored to capture your most meaningful
+            moments.
           </p>
         </div>
 
@@ -51,13 +71,17 @@ const Services = () => {
                 {service.description}
               </p>
 
-              <button className="mt-6 text-[#C08457] font-medium hover:underline">
+              <a
+                href={`https://wa.me/${phoneNumber}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-block text-[#C08457] font-medium hover:underline"
+              >
                 Learn More →
-              </button>
+              </a>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );
