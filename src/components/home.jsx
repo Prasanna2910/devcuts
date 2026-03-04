@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/devlogo.png";
+import logo from "../assets/devcutzlogo.png";
 import backgroundImage from "../assets/background.jpg";
 
 const Home = () => {
