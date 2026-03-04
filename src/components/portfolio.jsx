@@ -11,9 +11,9 @@ const Portfolio = () => {
   return (
     <section id="portfolio" className="reveal bg-[#F8F5F2] py-20 px-6">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* Heading */}
-        <h2 className="text-4xl font-semibold text-center text-[#1C1C1C]">
+        <h2 className="text-3xl sm:text-4xl font-semibold text-center text-[#1C1C1C]">
           Our Portfolio
         </h2>
         <p className="text-center text-[#6B6B6B] mt-3">
@@ -21,7 +21,7 @@ const Portfolio = () => {
         </p>
 
         {/* Category Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mt-12">
           {categories.map((category) => (
             <CategoryCard
               key={category}

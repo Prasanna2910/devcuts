@@ -103,7 +103,7 @@ const Contact = () => {
       <div className="max-w-6xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-14">
-          <h2 className="text-4xl font-semibold text-[#1C1C1C]">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-[#1C1C1C]">
             Contact
           </h2>
           <p className="text-[#6B6B6B] mt-4">
@@ -112,9 +112,9 @@ const Contact = () => {
         </div>
 
         {/* Layout */}
-        <div className="grid md:grid-cols-2 gap-12 items-start">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
           {/* LEFT – Social Buttons */}
-          <div className="bg-white p-10 rounded-2xl shadow-md flex flex-col items-center">
+          <div className="bg-white p-6 sm:p-10 rounded-2xl shadow-md flex flex-col items-center">
             <h3 className="text-2xl font-semibold text-[#1C1C1C] mb-8">
               Connect with Us
             </h3>
@@ -150,7 +150,7 @@ const Contact = () => {
           </div>
 
           {/* RIGHT – Query Form */}
-          <div className="bg-white p-8 rounded-2xl shadow-md">
+          <div className="bg-white p-5 sm:p-8 rounded-2xl shadow-md">
             <h3 className="text-2xl font-semibold text-[#1C1C1C] mb-6">
               Send a Query
             </h3>
@@ -196,11 +196,10 @@ const Contact = () => {
 
               {statusMessage && (
                 <div
-                  className={`p-3 rounded-lg text-center font-medium ${
-                    statusMessage.includes("✅")
+                  className={`p-3 rounded-lg text-center font-medium ${statusMessage.includes("✅")
                       ? "bg-green-100 text-green-800"
                       : "bg-red-100 text-red-800"
-                  }`}
+                    }`}
                 >
                   {statusMessage}
                 </div>

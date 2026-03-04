@@ -18,7 +18,7 @@ const About = () => {
 
         {/* Content */}
         <div>
-          <h2 className="text-4xl font-semibold text-[#1C1C1C]">About</h2>
+          <h2 className="text-3xl sm:text-4xl font-semibold text-[#1C1C1C]">About</h2>
 
           <p className="text-[#6B6B6B] mt-4 leading-relaxed">
             I’m <span className="text-[#C08457] font-medium">Deva</span>, the

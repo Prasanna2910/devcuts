@@ -30,22 +30,22 @@ const Home = () => {
         />
 
         {/* Tagline */}
-        <p className="font-lovelo text-lg md:text-2xl text-white tracking-[0.25em] uppercase font-bold opacity-0 animate-textLuxury delay-[600ms]">
+        <p className="font-lovelo text-sm sm:text-lg md:text-2xl text-white tracking-[0.15em] sm:tracking-[0.25em] uppercase font-bold opacity-0 animate-textLuxury delay-[600ms] px-4">
           Making memories with moments
         </p>
 
         {/* Buttons */}
-        <div className="mt-8 flex justify-center gap-4 opacity-0 animate-fadeUpSoft delay-[1300ms]">
+        <div className="mt-8 flex flex-wrap justify-center gap-4 opacity-0 animate-fadeUpSoft delay-[1300ms] px-4">
           <a
             href="#portfolio"
-            className="px-6 py-3 bg-[#C08457] text-white rounded-full hover:opacity-90 transition"
+            className="px-5 py-2.5 sm:px-6 sm:py-3 bg-[#C08457] text-white rounded-full hover:opacity-90 transition text-sm sm:text-base"
           >
             View Portfolio
           </a>
 
           <a
             href="#contact"
-            className="px-6 py-3 border border-white text-white rounded-full hover:bg-white hover:text-[#1C1C1C] transition"
+            className="px-5 py-2.5 sm:px-6 sm:py-3 border border-white text-white rounded-full hover:bg-white hover:text-[#1C1C1C] transition text-sm sm:text-base"
           >
             Book Now
           </a>

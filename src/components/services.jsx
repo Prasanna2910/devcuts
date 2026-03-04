@@ -47,7 +47,7 @@ const Services = () => {
       <div className="max-w-6xl mx-auto">
         {/* Section Heading */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-semibold text-[#1C1C1C]">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-[#1C1C1C]">
             Our Services
           </h2>
           <p className="text-[#6B6B6B] mt-4">
@@ -77,7 +77,7 @@ const Services = () => {
                 rel="noopener noreferrer"
                 className="mt-6 inline-block text-[#C08457] font-medium hover:underline"
               >
-                Learn More →
+                Connect with us →
               </a>
             </div>
           ))}

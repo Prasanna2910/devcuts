@@ -15,8 +15,8 @@ const ScrollReveal = () => {
         });
       },
       {
-        threshold: 0.15,          // triggers earlier
-        rootMargin: "0px 0px -10% 0px"  // smoother entry timing
+        threshold: 0.01,
+        rootMargin: "0px 0px 200px 0px",  // trigger 200px before section enters viewport
       }
     );
 

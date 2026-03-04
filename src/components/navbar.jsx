@@ -5,9 +5,9 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Home", link: "#home" },
-    { name: "About", link: "#about" },
-    { name: "Services", link: "#services" },
     { name: "Portfolio", link: "#portfolio" },
+    { name: "Services", link: "#services" },
+    { name: "About", link: "#about" },
     { name: "Contact", link: "#contact" },
   ];
 
@@ -41,7 +41,7 @@ const Navbar = () => {
         <div className="hidden md:block">
           <a href="#contact">
             <button className="group relative inline-flex overflow-hidden rounded-full p-[2px] focus:outline-none">
-              
+
               {/* Rotating Gradient Border */}
               <span
                 className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite]
