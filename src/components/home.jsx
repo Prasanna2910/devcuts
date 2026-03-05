@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../assets/devcutzlogo.png";
-import backgroundImage from "../assets/background.jpg";
+import backgroundImage from "../assets/bkround.jpg";
 
 const Home = () => {
   return (
