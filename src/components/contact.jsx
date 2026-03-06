@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { FaWhatsapp, FaInstagram, FaEnvelope } from "react-icons/fa";
 
 const Contact = () => {
+  const emailFormRef = useRef();
   const [loading, setLoading] = useState(false);
-  const [statusMessage, setStatusMessage] = useState("");
+  const [message, setMessage] = useState("");
+  const messageTimeoutRef = useRef(null);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -20,6 +22,20 @@ const Contact = () => {
     }
   }, []);
 
+  // Clear message after 4 seconds
+  useEffect(() => {
+    if (message) {
+      messageTimeoutRef.current = setTimeout(() => {
+        setMessage("");
+      }, 4000);
+    }
+    return () => {
+      if (messageTimeoutRef.current) {
+        clearTimeout(messageTimeoutRef.current);
+      }
+    };
+  }, [message]);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -30,12 +46,20 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    setStatusMessage("");
+    setMessage("");
+
+    // Format email in proper structure
+    const formattedMessage = `Name: ${formData.name}
+Email: ${formData.email}
+
+---
+
+${formData.message}`;
 
     const templateParams = {
       from_name: formData.name,
-      from_email: formData.email,
-      message: formData.message,
+      reply_to: formData.email,
+      message: formattedMessage,
     };
 
     emailjs
@@ -44,29 +68,22 @@ const Contact = () => {
         import.meta.env.VITE_TEMPLATE_ID,
         templateParams
       )
-      .then(() => {
-        setStatusMessage("✅ Query sent successfully!");
-        setLoading(false);
-
-        // Open Gmail compose as well
-        const subject = encodeURIComponent(
-          `New Query from ${formData.name}`
-        );
-        const body = encodeURIComponent(
-          `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
-        );
-
-        window.open(
-          `https://mail.google.com/mail/?view=cm&fs=1&to=devcutz.query@gmail.com&su=${subject}&body=${body}`,
-          "_blank"
-        );
-
-        setFormData({ name: "", email: "", message: "" });
-      })
-      .catch(() => {
-        setStatusMessage("❌ Failed to send.");
-        setLoading(false);
-      });
+      .then(
+        () => {
+          setMessage("✅ Message sent successfully!");
+          setLoading(false);
+          setFormData({
+            name: "",
+            email: "",
+            message: "",
+          });
+        },
+        (error) => {
+          console.error("EmailJS error:", error);
+          setMessage("❌ Failed to send message. Please try again.");
+          setLoading(false);
+        }
+      );
   };
 
   // Contact details
@@ -155,11 +172,11 @@ const Contact = () => {
               Send a Query
             </h3>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form ref={emailFormRef} onSubmit={handleSubmit} className="space-y-6">
               <input
                 type="text"
                 name="name"
-                placeholder="Your Name"
+                placeholder="Full Name"
                 value={formData.name}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#C08457] focus:outline-none"
@@ -169,7 +186,7 @@ const Contact = () => {
               <input
                 type="email"
                 name="email"
-                placeholder="Your Email"
+                placeholder="Email Address"
                 value={formData.email}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#C08457] focus:outline-none"
@@ -178,8 +195,8 @@ const Contact = () => {
 
               <textarea
                 name="message"
-                rows="5"
-                placeholder="Write your query..."
+                rows="4"
+                placeholder="Your query..."
                 value={formData.message}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#C08457] focus:outline-none"
@@ -189,19 +206,20 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#C08457] text-white py-3 rounded-full hover:opacity-90 transition disabled:opacity-50"
+                className="w-full bg-[#C08457] text-white py-3 rounded-full hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? "Sending..." : "Send Query"}
               </button>
 
-              {statusMessage && (
+              {message && (
                 <div
-                  className={`p-3 rounded-lg text-center font-medium ${statusMessage.includes("✅")
+                  className={`p-3 rounded-lg text-center font-medium ${
+                    message.includes("✅")
                       ? "bg-green-100 text-green-800"
                       : "bg-red-100 text-red-800"
-                    }`}
+                  }`}
                 >
-                  {statusMessage}
+                  {message}
                 </div>
               )}
             </form>
